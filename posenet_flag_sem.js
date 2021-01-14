@@ -558,7 +558,7 @@ async function bindPage() {
 
   let options = {
     inputs: 34,
-    outputs: 4,
+    outputs: 3,
     task: 'classification',
     debug: true
   }
