@@ -51,7 +51,7 @@ let score = 0;
 let bpface = new Image();
 let navScale = 1;
 let brain;
-let poseLabel = -1;
+let poseLabel = "Y";
 let judge_pose;
 bpface.src = "bp_face.png"
 
@@ -558,7 +558,7 @@ async function bindPage() {
 
   let options = {
     inputs: 34,
-    outputs: 3,
+    outputs: 4,
     task: 'classification',
     debug: true
   }
