@@ -16,16 +16,17 @@
         maxPredictions = model.getTotalClasses();
 
         // Convenience function to setup a webcam
-        const size = 200;
-        const flip = true; // whether to flip the webcam
-        webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
+        const videoWidth = window.innerWidth * 0.8;
+        const videoHeight = window.innerHeight * 0.8;
+        const flip = false; // whether to flip the webcam
+        webcam = new tmPose.Webcam(videoWidth, videoHeight, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
         await webcam.play();
         window.requestAnimationFrame(loop);
 
         // append/get elements to the DOM
         const canvas = document.getElementById("canvas");
-        canvas.width = size; canvas.height = size;
+        canvas.width = videoWidth; canvas.height = videoHeight;
         ctx = canvas.getContext("2d");
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
