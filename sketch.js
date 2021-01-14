@@ -18,8 +18,11 @@ let skeleton;
 let brain;
 let poseLabel = "Y";
 
+const videoWidth = window.innerWidth * 0.9;
+const videoHeight = window.innerHeight * 0.9;
+
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(videoWidth, videoHeight);
   video = createCapture(VIDEO);
   video.elt.setAttribute('playsinline', '');
   video.hide();
