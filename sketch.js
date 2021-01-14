@@ -21,6 +21,7 @@ let poseLabel = "Y";
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
+  video.elt.setAttribute('playsinline', '');
   video.hide();
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on('pose', gotPoses);
