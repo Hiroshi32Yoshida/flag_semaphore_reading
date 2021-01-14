@@ -23,7 +23,15 @@ const videoHeight = window.innerHeight * 0.9;
 
 function setup() {
   createCanvas(videoWidth, videoHeight);
-  video = createCapture(VIDEO);
+  video = createCapture({
+    audio: false,
+    video: {
+        width: videoWidth,
+        height: videoHeight
+    }
+}, function() {
+    console.log('capture ready.')
+});
   video.elt.setAttribute('playsinline', '');
   video.hide();
   poseNet = ml5.poseNet(video, modelLoaded);
