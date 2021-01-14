@@ -49,7 +49,10 @@ let seq_genkaku = [];
 let curText = '';
 let score = 0;
 let bpface = new Image();
-let navScale = 1
+let navScale = 1;
+let brain;
+let poseLabel = -1;
+let judge_pose;
 bpface.src = "bp_face.png"
 
 /**
@@ -442,6 +445,9 @@ function detectPoseInRealTime(video, net) {
         minPartConfidence = +guiState.multiPoseDetection.minPartConfidence;
         break;
     }
+    if (poses.length > 0) {
+      judge_pose = poses[0].pose;
+    }
 
     ctx.clearRect(0, 0, videoWidth, videoHeight);
 
@@ -480,7 +486,8 @@ function detectPoseInRealTime(video, net) {
         }
       }
 
-      result = judge_genkaku(keypoints, minPartConfidence);
+      //result = judge_genkaku(keypoints, minPartConfidence);
+      result = poseLabel;
       if(result != -1){
           if(genkaku == result){
               count++;
@@ -549,9 +556,52 @@ async function bindPage() {
     throw e;
   }
 
+  let options = {
+    inputs: 34,
+    outputs: 4,
+    task: 'classification',
+    debug: true
+  }
+  brain = ml5.neuralNetwork(options);
+  const modelInfo = {
+    model: 'model2/model.json',
+    metadata: 'model2/model_meta.json',
+    weights: 'model2/model.weights.bin',
+  };
+  brain.load(modelInfo, brainLoaded);
+
   setupGui([], net);
   //setupFPS();
   detectPoseInRealTime(video, net);
+}
+
+function brainLoaded() {
+  console.log('pose classification ready!');
+  classifyPose();
+}
+
+function classifyPose() {
+  if (judge_pose) {
+    let inputs = [];
+    for (let i = 0; i < judge_pose.keypoints.length; i++) {
+      let x = judge_pose.keypoints[i].position.x;
+      let y = judge_pose.keypoints[i].position.y;
+      inputs.push(x);
+      inputs.push(y);
+    }
+    brain.classify(inputs, gotResult);
+  } else {
+    setTimeout(classifyPose, 100);
+  }
+}
+
+function gotResult(error, results) {
+  
+  if (results[0].confidence > 0.75) {
+    poseLabel = results[0].label.toUpperCase();
+  }
+  //console.log(results[0].confidence);
+  classifyPose();
 }
 
 navigator.getUserMedia = navigator.getUserMedia ||
