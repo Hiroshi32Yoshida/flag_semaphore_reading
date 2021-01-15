@@ -127,7 +127,10 @@ function gotPoses(poses) {
       //}
       let target = [targetLabel];
       //brain.addData(inputs, target);
-      brain.addData(pose_normalize(pose.keypoints), target);
+      let inputs = pose_normalize(pose.keypoints);
+      if(inputs != null){
+        brain.addData(pose_normalize(pose.keypoints), target);
+      }
     }
   }
 }
