@@ -56,6 +56,7 @@ function classifyPose() {
     let inputs = pose_normalize(pose.keypoints);
     if(inputs == null){
       poseLabel = '';
+      setTimeout(classifyPose, 100);
     }else{
       brain.classify(inputs, gotResult);
     }
