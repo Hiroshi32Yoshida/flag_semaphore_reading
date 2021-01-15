@@ -32,7 +32,7 @@ function setup() {
 }, function() {
     console.log('capture ready.')
 });
-  video.elt.setAttribute('playsinline', true);
+  video.elt.setAttribute('playsinline', false);
   video.muted = "true";
   video.hide();
   poseNet = ml5.poseNet(video, modelLoaded);
@@ -40,7 +40,7 @@ function setup() {
 
   let options = {
     inputs: 34,
-    outputs: 3,
+    outputs: 4,
     task: 'classification',
     debug: true
   }
