@@ -20,9 +20,11 @@ function keyPressed() {
     console.log(targetLabel);
     setTimeout(function() {
       console.log('collecting');
+      logMsg('collecting');
       state = 'collecting';
       setTimeout(function() {
         console.log('not collecting');
+        logMsg('not collecting');
         state = 'waiting';
       }, 2000);
     }, 5000);
@@ -38,7 +40,8 @@ function setup() {
         height: videoHeight
     }
   }, function() {
-    console.log('capture ready.')
+    console.log('capture ready.');
+    logMsg('capture ready.');
   });
   video.elt.setAttribute('playsinline', false);
   video.muted = "true";
@@ -68,6 +71,7 @@ function setup() {
 
 function brainLoaded() {
   console.log('pose classification ready!');
+  logMsg('pose classification ready!');
   classifyPose();
 }
 
@@ -103,6 +107,7 @@ function dataReady() {
 
 function finished() {
   console.log('model trained');
+  logMsg('model trained');
   brain.save();
   classifyPose();
 }
@@ -129,6 +134,7 @@ function gotPoses(poses) {
 
 function modelLoaded() {
   console.log('poseNet ready');
+  logMsg('poseNet ready');
 }
 
 function draw() {

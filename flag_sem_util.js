@@ -62,6 +62,10 @@ function getCenterCoord(keypoints){
   return {x : center_x, y : center_y};
 }
 
+function logMsg(text){
+  document.getElementById('msglabel').textContent = text;
+}
+
 const UP = 1;
 const DOWN = 2;
 const LEFT = 3;
