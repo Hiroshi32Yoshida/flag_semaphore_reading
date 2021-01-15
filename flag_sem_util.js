@@ -40,7 +40,7 @@ function pose_normalize(keypoints){
 
 function getCenterCoord(keypoints){
   let center_x, center_y;
-  if(keypoint.length > RIGHTHIP){
+  if(keypoints.length > RIGHTHIP){
     // *正規化準備 -> 上半身の中央点を算出
     let x0 = keypoints[RIGHTSHOULDER].position.x, y0 = keypoints[RIGHTSHOULDER].position.y;
     let x1 = keypoints[LEFTHIP].position.x, y1 = keypoints[LEFTHIP].position.y;
