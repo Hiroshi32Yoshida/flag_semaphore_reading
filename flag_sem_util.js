@@ -31,8 +31,6 @@ function pose_normalize(keypoints){
     return null;
   }
   let basedist = distance(x0, y0, x1, y1);
-  strMsg = x0 + ', ' + y0 + ', ' + x1 + ', ' + y1 + ', ' + basedist;
-  logMsg(strMsg);
   if(basedist == float.NaN || basedist == 0){
     logMsg('****************************************************');
     return null;
