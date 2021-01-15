@@ -139,8 +139,8 @@ function modelLoaded() {
 
 function draw() {
   push();
-  translate(video.width, 0);
-  //scale(-1, 1);
+  //translate(video.width, 0);
+  scale(1, 1);
   image(video, 0, 0, video.width, video.height);
 
   if (pose) {
