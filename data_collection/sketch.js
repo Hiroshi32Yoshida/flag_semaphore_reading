@@ -9,9 +9,6 @@ let poseLabel = "";
 let state = 'waiting';
 let targetLabel;
 
-const videoWidth = window.innerWidth * 0.9;
-const videoHeight = window.innerHeight * 0.9;
-
 function keyPressed() {
   if (key == 't') {
     brain.normalizeData();

@@ -6,9 +6,6 @@ let skeleton;
 let brain;
 let poseLabel = "Y";
 
-const videoWidth = window.innerWidth * 0.9;
-const videoHeight = window.innerHeight * 0.9;
-
 function setup() {
   createCanvas(videoWidth, videoHeight);
   video = createCapture({
