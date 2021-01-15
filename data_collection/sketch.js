@@ -128,8 +128,8 @@ function gotPoses(poses) {
       let target = [targetLabel];
       //brain.addData(inputs, target);
       let inputs = pose_normalize(pose.keypoints);
-      if(inputs.length > 0){
-        brain.addData(pose_normalize(pose.keypoints), target);
+      if(inputs[0] != null){
+        brain.addData(inputs, target);
       }
     }
   }
