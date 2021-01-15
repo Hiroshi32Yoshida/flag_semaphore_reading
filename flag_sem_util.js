@@ -29,7 +29,10 @@ function pose_normalize(keypoints){
   let basedist = distance(x0, y0, x1, y1);
   strMsg = x0 + ', ' + y0 + ', ' + x1 + ', ' + y1 + ', ' + basedist;
   logMsg(strMsg);
-  if(basedist == NaN || basedist == 0) return null;
+  if(basedist == NaN || basedist == 0){
+    logMsg('****************************************************');
+    return null;
+  }
 
   for (let i = RIGHTEYE; i <= RIGHTHIP; i++) {
     let l0 = distance(x0, y0, keypoints[i].position.x, keypoints[i].position.y) / basedist;
