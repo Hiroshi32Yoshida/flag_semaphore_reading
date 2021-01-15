@@ -68,10 +68,8 @@ function classifyPose() {
 function gotResult(error, results) {
   if (results[0].confidence > 0.75) {
     poseLabel = getGenkaku(results[0].label.toUpperCase());
-    logMsg(results[0].confidence.toFiexed(3));
   }else{
     poseLabel = '';
-    logMsg('');
   }
   //console.log(results[0].confidence);
   classifyPose();
