@@ -4,12 +4,12 @@ function setup() {
   createCanvas(640, 480);
   let options = {
     inputs: RIGHTHIP*2,
-    outputs: 17,
+    outputs: 3,
     task: 'classification',
     debug: true
   }
   brain = ml5.neuralNetwork(options);
-  brain.loadData('ymca.json', dataReady);
+  brain.loadData('test.json', dataReady);
 }
 
 function dataReady() {
