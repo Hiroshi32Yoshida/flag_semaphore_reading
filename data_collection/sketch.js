@@ -26,7 +26,7 @@ function keyPressed() {
         console.log('not collecting');
         logMsg('not collecting');
         state = 'waiting';
-      }, 2000);
+      }, 5000);
     }, 5000);
   }
 }
@@ -51,7 +51,7 @@ function setup() {
 
   let options = {
     inputs: 22,
-    outputs: 4,
+    outputs: 17,
     task: 'classification',
     debug: true
   }
