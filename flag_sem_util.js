@@ -26,10 +26,14 @@ function pose_normalize(keypoints){
 
   let x0 = keypoints[NOSE].position.x, y0 = keypoints[NOSE].position.y;
   let x1 = getCenterCoord(keypoints).x, y1 = getCenterCoord(keypoints).y;
+  if(x1 == undefined || y1 == undefined){
+    logMsg('****************************************************');
+    return null;
+  }
   let basedist = distance(x0, y0, x1, y1);
   strMsg = x0 + ', ' + y0 + ', ' + x1 + ', ' + y1 + ', ' + basedist;
   logMsg(strMsg);
-  if(basedist == NaN || basedist == 0){
+  if(basedist == float.NaN || basedist == 0){
     logMsg('****************************************************');
     return null;
   }
