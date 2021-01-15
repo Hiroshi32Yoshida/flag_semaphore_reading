@@ -75,6 +75,29 @@ function logMsg(text){
   document.getElementById('msglabel').textContent = text;
 }
 
+function getGenkaku(text){
+  switch(text){
+    case 'A': return 0;
+    case 'B': return 1;
+    case 'C': return 2;
+    case 'D': return -2;
+    case 'E': return 3;
+    case 'F': return 4;
+    case 'G': return 5;
+    case 'H': return 6;
+    case 'I': return 7;
+    case 'J': return 8;
+    case 'K': return 9;
+    case 'L': return 10;
+    case 'M': return -11;
+    case 'N': return 11;
+    case 'O': return 12;
+    case 'P': return 13;
+    case 'Q': return 14;
+    default: return -1;
+  }
+}
+
 const UP = 1;
 const DOWN = 2;
 const LEFT = 3;
