@@ -32,7 +32,8 @@ function setup() {
 }, function() {
     console.log('capture ready.')
 });
-  video.elt.setAttribute('playsinline', '');
+  video.elt.setAttribute('playsinline', true);
+  video.muted = "true";
   video.hide();
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on('pose', gotPoses);
@@ -45,9 +46,9 @@ function setup() {
   }
   brain = ml5.neuralNetwork(options);
   const modelInfo = {
-    model: 'model3/model.json',
-    metadata: 'model3/model_meta.json',
-    weights: 'model3/model.weights.bin',
+    model: '../model2/model.json',
+    metadata: '../model2/model_meta.json',
+    weights: '../model2/model.weights.bin',
   };
   brain.load(modelInfo, brainLoaded);
 }
