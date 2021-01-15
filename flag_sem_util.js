@@ -19,6 +19,29 @@ const RIGHTKNEE = 14;
 const LEFTANKLE = 15;
 const RIGHTANKLE = 16;
 
+const UP = 1;
+const DOWN = 2;
+const LEFT = 3;
+const RIGHT = 4;
+
+const EXTENDED = 0;
+const FOLDED = 1;
+const UNKNOWN = -1;
+
+const ANG_LELBOW = 0;
+const ANG_RELBOW = 1;
+const ANG_LSHOULDER = 2;
+const ANG_RSHOULDER = 3
+const ANG_LSHOULDERW = 4;
+const ANG_RSHOULDERW = 5;
+const ANG_LSHOULDERWN = 6;
+const ANG_RSHOULDERWN = 7;
+
+const LEFTHAND_UPDOWN = 0;
+const RIGHTHAND_UPDOWN = 1;
+const LEFTHAND_LR = 2;
+const RIGHTHAND_LR = 3;
+
 const distance = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
 
 function pose_normalize(keypoints){
@@ -95,26 +118,3 @@ function getGenkaku(text){
     default: return -1;
   }
 }
-
-const UP = 1;
-const DOWN = 2;
-const LEFT = 3;
-const RIGHT = 4;
-
-const EXTENDED = 0;
-const FOLDED = 1;
-const UNKNOWN = -1;
-
-const ANG_LELBOW = 0;
-const ANG_RELBOW = 1;
-const ANG_LSHOULDER = 2;
-const ANG_RSHOULDER = 3
-const ANG_LSHOULDERW = 4;
-const ANG_RSHOULDERW = 5;
-const ANG_LSHOULDERWN = 6;
-const ANG_RSHOULDERWN = 7;
-
-const LEFTHAND_UPDOWN = 0;
-const RIGHTHAND_UPDOWN = 1;
-const LEFTHAND_LR = 2;
-const RIGHTHAND_LR = 3;

@@ -92,7 +92,7 @@ function draw() {
   push();
   //translate(video.width, 0);
   //scale(-1, 1);
-  image(video, 0, 0, video.width, video.height);
+  image(video, 0, 0, videoWidth, videoHeight);
 
   if (pose) {
     for (let i = 0; i < skeleton.length; i++) {
@@ -108,15 +108,15 @@ function draw() {
       let y = pose.keypoints[i].position.y;
       fill(0);
       stroke(255);
-      ellipse(x, y, 16, 16);
+      ellipse(x, y, 10, 10);
     }
   }
   pop();
 
   fill(255, 255, 255);
   noStroke();
-  textSize(video.width/3);
+  textSize(videoWidth/3);
   textFont('sans-serif');
   textAlign(CENTER, CENTER);
-  text(poseLabel, video.width / 2, video.height / 2);
+  text(poseLabel, videoWidth / 2, videoHeight / 2);
 }
