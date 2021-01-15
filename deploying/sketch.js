@@ -113,9 +113,10 @@ function draw() {
   }
   pop();
 
-  fill(255, 0, 255);
+  fill(255, 255, 255);
   noStroke();
-  textSize(512);
+  textSize(video.width/3);
+  textFont('sans-serif');
   textAlign(CENTER, CENTER);
-  text(poseLabel, width / 2, height / 2);
+  text(poseLabel, video.width / 2, video.height / 2);
 }
