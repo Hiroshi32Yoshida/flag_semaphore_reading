@@ -117,7 +117,7 @@ function draw() {
   fill(255, 255, 255);
   noStroke();
   textSize(video.width/3);
-  textFont(font);
+  textFont('sans-serif');
   textAlign(CENTER, CENTER);
   text(poseLabel, video.width / 2, video.height / 2);
 }
