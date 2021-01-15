@@ -39,15 +39,15 @@ function setup() {
 
   let options = {
     inputs: 34,
-    outputs: 3,
+    outputs: 4,
     task: 'classification',
     debug: true
   }
   brain = ml5.neuralNetwork(options);
   const modelInfo = {
-    model: 'model3/model.json',
-    metadata: 'model3/model_meta.json',
-    weights: 'model3/model.weights.bin',
+    model: 'model2/model.json',
+    metadata: 'model2/model_meta.json',
+    weights: 'model2/model.weights.bin',
   };
   brain.load(modelInfo, brainLoaded);
 }
