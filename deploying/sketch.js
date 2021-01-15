@@ -5,7 +5,6 @@ let skeleton;
 
 let brain;
 let poseLabel = "";
-const font = loadFont('assets/SourceSansPro-Regular.otf');
 
 function setup() {
   createCanvas(videoWidth, videoHeight);
