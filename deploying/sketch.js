@@ -4,7 +4,7 @@ let pose;
 let skeleton;
 
 let brain;
-let poseLabel = "Y";
+let poseLabel = "";
 
 function setup() {
   createCanvas(videoWidth, videoHeight);
