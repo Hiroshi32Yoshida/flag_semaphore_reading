@@ -3,8 +3,8 @@ let brain;
 function setup() {
   createCanvas(640, 480);
   let options = {
-    inputs: RIGHTHIP*2,
-    outputs: 3,
+    inputs: 22,
+    outputs: 4,
     task: 'classification',
     debug: true
   }

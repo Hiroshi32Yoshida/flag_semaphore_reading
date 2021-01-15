@@ -24,8 +24,8 @@ function setup() {
   poseNet.on('pose', gotPoses);
 
   let options = {
-    inputs: RIGHTHIP*2,
-    outputs: 17,
+    inputs: 22,
+    outputs: 4,
     task: 'classification',
     debug: true
   }

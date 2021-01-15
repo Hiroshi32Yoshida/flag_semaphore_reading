@@ -30,7 +30,7 @@ function pose_normalize(keypoints){
   strMsg = x0 + ', ' + y0 + ', ' + x1 + ', ' + y1 + ', ' + basedist;
   if(basedist == 0) return inputs;
 
-  for (let i = 0; i <= RIGHTHIP; i++) {
+  for (let i = RIGHTEYE; i <= RIGHTHIP; i++) {
     let l0 = distance(x0, y0, keypoints[i].position.x, keypoints[i].position.y) / basedist;
     let l1 = distance(x1, y1, keypoints[i].position.x, keypoints[i].position.y) / basedist;
     inputs.push(l0*100);
