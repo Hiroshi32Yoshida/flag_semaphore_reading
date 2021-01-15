@@ -1,5 +1,3 @@
-import { pose_normalize } from "../posenet_flag_sem";
-
 let video;
 let poseNet;
 let pose;

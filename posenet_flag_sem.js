@@ -2,27 +2,27 @@ const videoWidth = window.innerWidth * 0.8;
 const videoHeight = window.innerHeight * 0.8;
 const stats = new Stats();
 
-export const NOSE = 0;
-export const LEFTEYE = 1;
-export const RIGHTEYE = 2;
-export const LEFTEAR = 3;
-export const RIGHTEAR = 4;
-export const LEFTSHOULDER = 5;
-export const RIGHTSHOULDER = 6;
-export const LEFTELBOW = 7;
-export const RIGHTELBOW = 8;
-export const LEFTWRIST = 9;
-export const RIGHTWRIST = 10;
-export const LEFTHIP = 11;
-export const RIGHTHIP = 12;
-export const LEFTKNEE = 13;
-export const RIGHTKNEE = 14;
-export const LEFTANKLE = 15;
-export const RIGHTANKLE = 16;
+const NOSE = 0;
+const LEFTEYE = 1;
+const RIGHTEYE = 2;
+const LEFTEAR = 3;
+const RIGHTEAR = 4;
+const LEFTSHOULDER = 5;
+const RIGHTSHOULDER = 6;
+const LEFTELBOW = 7;
+const RIGHTELBOW = 8;
+const LEFTWRIST = 9;
+const RIGHTWRIST = 10;
+const LEFTHIP = 11;
+const RIGHTHIP = 12;
+const LEFTKNEE = 13;
+const RIGHTKNEE = 14;
+const LEFTANKLE = 15;
+const RIGHTANKLE = 16;
 
 const distance = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
 
-export function pose_normalize(keypoints){
+function pose_normalize(keypoints){
   inputs = [];
 
   let x0, y0 = keypoints[NOSE].position;
@@ -39,7 +39,7 @@ export function pose_normalize(keypoints){
   return inputs;
 }
 
-export function getCenterCoord(keypoint){
+function getCenterCoord(keypoint){
   let center_x, center_y;
   if(keypoint.length > RIGHTHIP){
     // *正規化準備 -> 上半身の中央点を算出
