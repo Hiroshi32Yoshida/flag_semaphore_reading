@@ -27,6 +27,8 @@ function pose_normalize(keypoints){
   let x0, y0 = keypoints[NOSE].position;
   let x1, y1 = getCenterCoord(keypoints);
   basedist = distance(x0, y0, x1, y1);
+  str = x0.toString() + ', ' + y0.toString() + ', ' + x1.toString() + ', ' + y1.toString() + ', ' + baseline.toString();
+  logMsg(str);
   if(basedist == 0) return inputs;
 
   for (let i = 0; i <= RIGHTHIP; i++) {
