@@ -92,7 +92,7 @@ function draw() {
   push();
   //translate(video.width, 0);
   //scale(-1, 1);
-  image(video, 0, 0, video.width, video.height);
+  image(video, 0, 0, videoWidth, videoHeight);
 
   if (pose) {
     for (let i = 0; i < skeleton.length; i++) {
