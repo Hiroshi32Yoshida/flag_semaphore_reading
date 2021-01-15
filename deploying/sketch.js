@@ -45,13 +45,13 @@ function brainLoaded() {
 
 function classifyPose() {
   if (pose) {
-   let inputs = pose_normalize(pose.keypoints);
-   if(inputs == null){
-     poseLabel = '';
-     setTimeout(classifyPose, 100);
-   }else{
-     brain.classify(inputs, gotResult);
-   }
+  //  let inputs = pose_normalize(pose.keypoints);
+  //  if(inputs == null){
+  //    poseLabel = '';
+  //    setTimeout(classifyPose, 100);
+  //  }else{
+  //    brain.classify(inputs, gotResult);
+  //  }
   } else {
     setTimeout(classifyPose, 100);
   }
@@ -87,21 +87,21 @@ function draw() {
   image(video, 0, 0, videoWidth, videoHeight);
 
   if (pose) {
-    // for (let i = 0; i < skeleton.length; i++) {
-    //   let a = skeleton[i][0];
-    //   let b = skeleton[i][1];
-    //   strokeWeight(2);
-    //   stroke(0);
+    for (let i = 0; i < skeleton.length; i++) {
+      let a = skeleton[i][0];
+      let b = skeleton[i][1];
+      strokeWeight(2);
+      stroke(0);
 
-    //   line(a.position.x, a.position.y, b.position.x, b.position.y);
-    // }
-    // for (let i = 0; i < pose.keypoints.length; i++) {
-    //   let x = pose.keypoints[i].position.x;
-    //   let y = pose.keypoints[i].position.y;
-    //   fill(0);
-    //   stroke(255);
-    //   ellipse(x, y, 10, 10);
-    // }
+      line(a.position.x, a.position.y, b.position.x, b.position.y);
+    }
+    for (let i = 0; i < pose.keypoints.length; i++) {
+      let x = pose.keypoints[i].position.x;
+      let y = pose.keypoints[i].position.y;
+      fill(0);
+      stroke(255);
+      ellipse(x, y, 10, 10);
+    }
   }
   pop();
 
