@@ -50,12 +50,12 @@ function pose_normalize(keypoints){
   let x0 = keypoints[NOSE].position.x, y0 = keypoints[NOSE].position.y;
   let x1 = getCenterCoord(keypoints).x, y1 = getCenterCoord(keypoints).y;
   if(x1 == undefined || y1 == undefined){
-    logMsg('****************************************************');
+    //logMsg('****************************************************');
     return null;
   }
   let basedist = distance(x0, y0, x1, y1);
   if(basedist == float.NaN || basedist == 0){
-    logMsg('****************************************************');
+    //logMsg('****************************************************');
     return null;
   }
 
