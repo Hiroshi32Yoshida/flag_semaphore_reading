@@ -1,14 +1,4 @@
-// ml5.js: Pose Classification
-// The Coding Train / Daniel Shiffman
-// https://thecodingtrain.com/learning/ml5/7.2-pose-classification.html
-// https://youtu.be/FYgYyq-xqAw
-
-// All code: https://editor.p5js.org/codingtrain/sketches/JoZl-QRPK
-
-// Separated into three sketches
-// 1: Data Collection: https://editor.p5js.org/codingtrain/sketches/kTM0Gm-1q
-// 2: Model Training: https://editor.p5js.org/codingtrain/sketches/-Ywq20rM9
-// 3: Model Deployment: https://editor.p5js.org/codingtrain/sketches/c5sDNr8eM
+import { pose_normalize } from "../posenet_flag_sem";
 
 let video;
 let poseNet;
@@ -20,6 +10,9 @@ let poseLabel = "";
 
 let state = 'waiting';
 let targetLabel;
+
+const videoWidth = window.innerWidth * 0.9;
+const videoHeight = window.innerHeight * 0.9;
 
 function keyPressed() {
   if (key == 't') {
@@ -37,20 +30,30 @@ function keyPressed() {
         console.log('not collecting');
         state = 'waiting';
       }, 2000);
-    }, 1000);
+    }, 5000);
   }
 }
 
 function setup() {
-  createCanvas(640, 480);
-  video = createCapture(VIDEO);
+  createCanvas(videoWidth, videoHeight);
+  video = createCapture({
+    audio: false,
+    video: {
+        width: videoWidth,
+        height: videoHeight
+    }
+  }, function() {
+    console.log('capture ready.')
+  });
+  video.elt.setAttribute('playsinline', false);
+  video.muted = "true";
   video.hide();
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on('pose', gotPoses);
 
   let options = {
-    inputs: 34,
-    outputs: 4,
+    inputs: RIGHTHIP*2,
+    outputs: 17,
     task: 'classification',
     debug: true
   }
@@ -75,14 +78,15 @@ function brainLoaded() {
 
 function classifyPose() {
   if (pose) {
-    let inputs = [];
-    for (let i = 0; i < pose.keypoints.length; i++) {
-      let x = pose.keypoints[i].position.x;
-      let y = pose.keypoints[i].position.y;
-      inputs.push(x);
-      inputs.push(y);
-    }
-    brain.classify(inputs, gotResult);
+    //let inputs = [];
+    //for (let i = 0; i < pose.keypoints.length; i++) {
+    //  let x = pose.keypoints[i].position.x;
+    //  let y = pose.keypoints[i].position.y;
+    //  inputs.push(x);
+    //  inputs.push(y);
+    //}
+    //brain.classify(inputs, gotResult);
+    brain.classify(pose_normalize(pose.keypoints), gotResult);
   } else {
     setTimeout(classifyPose, 100);
   }
@@ -114,19 +118,19 @@ function gotPoses(poses) {
     pose = poses[0].pose;
     skeleton = poses[0].skeleton;
     if (state == 'collecting') {
-      let inputs = [];
-      for (let i = 0; i < pose.keypoints.length; i++) {
-        let x = pose.keypoints[i].position.x;
-        let y = pose.keypoints[i].position.y;
-        inputs.push(x);
-        inputs.push(y);
-      }
+      //let inputs = [];
+      //for (let i = 0; i < pose.keypoints.length; i++) {
+      //  let x = pose.keypoints[i].position.x;
+      //  let y = pose.keypoints[i].position.y;
+      //  inputs.push(x);
+      //  inputs.push(y);
+      //}
       let target = [targetLabel];
-      brain.addData(inputs, target);
+      //brain.addData(inputs, target);
+      brain.addData(pose_normalize(pose.keypoints), target);
     }
   }
 }
-
 
 function modelLoaded() {
   console.log('poseNet ready');
@@ -152,7 +156,7 @@ function draw() {
       let y = pose.keypoints[i].position.y;
       fill(0);
       stroke(255);
-      ellipse(x, y, 16, 16);
+      ellipse(x, y, 10, 10);
     }
   }
   pop();
