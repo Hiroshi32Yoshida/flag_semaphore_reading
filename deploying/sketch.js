@@ -45,13 +45,13 @@ function brainLoaded() {
 
 function classifyPose() {
   if (pose) {
-//    let inputs = pose_normalize(pose.keypoints);
-//    if(inputs == null){
-//      poseLabel = '';
-//      setTimeout(classifyPose, 100);
-//    }else{
-//      brain.classify(inputs, gotResult);
-//    }
+   let inputs = pose_normalize(pose.keypoints);
+   if(inputs == null){
+     poseLabel = '';
+     setTimeout(classifyPose, 100);
+   }else{
+     brain.classify(inputs, gotResult);
+   }
   } else {
     setTimeout(classifyPose, 100);
   }
