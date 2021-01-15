@@ -28,14 +28,13 @@ function pose_normalize(keypoints){
   let x1 = getCenterCoord(keypoints).x, y1 = getCenterCoord(keypoints).y;
   basedist = distance(x0, y0, x1, y1);
   strMsg = x0 + ', ' + y0 + ', ' + x1 + ', ' + y1 + ', ' + basedist;
-  logMsg(strMsg);
   if(basedist == 0) return inputs;
 
   for (let i = 0; i <= RIGHTHIP; i++) {
     let l0 = distance(x0, y0, keypoints[i].position.x, keypoints[i].position.y) / basedist;
     let l1 = distance(x1, y1, keypoints[i].position.x, keypoints[i].position.y) / basedist;
-    inputs.push(l0);
-    inputs.push(l1);
+    inputs.push(l0*100);
+    inputs.push(l1*100);
   }
   return inputs;
 }
