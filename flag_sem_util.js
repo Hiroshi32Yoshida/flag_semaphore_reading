@@ -24,8 +24,8 @@ const distance = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
 function pose_normalize(keypoints){
   inputs = [];
 
-  let x0, y0 = keypoints[NOSE].position;
-  let x1, y1 = getCenterCoord(keypoints);
+  let x0 = keypoints[NOSE].position.x, y0 = keypoints[NOSE].position.y;
+  let x1 = getCenterCoord(keypoints).x, y1 = getCenterCoord(keypoints).y;
   basedist = distance(x0, y0, x1, y1);
   strMsg = x0 + ', ' + y0 + ', ' + x1 + ', ' + y1 + ', ' + basedist;
   logMsg(strMsg);
