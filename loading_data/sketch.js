@@ -9,7 +9,7 @@ function setup() {
     debug: true
   }
   brain = ml5.neuralNetwork(options);
-  brain.loadData('test.json', dataReady);
+  brain.loadData('ymca.json', dataReady);
 }
 
 function dataReady() {
