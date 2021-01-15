@@ -26,7 +26,7 @@ function keyPressed() {
         console.log('not collecting');
         logMsg('not collecting');
         state = 'waiting';
-      }, 5000);
+      }, 10000);
     }, 5000);
   }
 }
@@ -85,7 +85,12 @@ function classifyPose() {
     //  inputs.push(y);
     //}
     //brain.classify(inputs, gotResult);
-    brain.classify(pose_normalize(pose.keypoints), gotResult);
+    let inputs = pose_normalize(pose.keypoints);
+    if(inputs == null){
+      poseLabel = '';
+    }else{
+      brain.classify(inputs, gotResult);
+    }
   } else {
     setTimeout(classifyPose, 100);
   }
