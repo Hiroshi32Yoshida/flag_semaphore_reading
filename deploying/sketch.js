@@ -100,7 +100,7 @@ function draw() {
       let y = pose.keypoints[i].position.y;
       fill(0);
       stroke(255);
-      ellipse(x, y, 10, 10);
+      ellipse(x, y, 6, 6);
     }
   }
   pop();
