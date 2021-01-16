@@ -90,10 +90,8 @@ function gotResult(error, results) {
       genkaku = '';
     }
   }
-  //console.log(results[0].confidence);
   classifyPose();
 }
-
 
 function gotPoses(poses) {
   if (poses.length > 0) {
@@ -101,7 +99,6 @@ function gotPoses(poses) {
     skeleton = poses[0].skeleton;
   }
 }
-
 
 function modelLoaded() {
   console.log('poseNet ready');
