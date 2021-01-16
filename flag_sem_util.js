@@ -42,8 +42,8 @@ const RIGHTHAND_UPDOWN = 1;
 const LEFTHAND_LR = 2;
 const RIGHTHAND_LR = 3;
 
-//const distance = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
-const distance = (x0, y0, x1, y1) => Math.sqrt(Math.pow(x1-x0, 2) + Math.pow(y1-y0, 2));
+const distance = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
+//const distance = (x0, y0, x1, y1) => Math.sqrt(Math.pow(x1-x0, 2) + Math.pow(y1-y0, 2));
 
 function pose_normalize(keypoints){
   inputs = [];
