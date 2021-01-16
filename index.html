@@ -1,11 +1,48 @@
 <!DOCTYPE html><html><head>
+  <script src="p5.js"></script>
+  <script src="p5.sound.min.js"></script>
+  <script src="ml5.min.js"></script>
+  <script src="flag_sem_util.js"></script>
+  <!--   <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+ -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="utf-8">
 
 </head>
 
 <body>
-  <div><a href = "data_collection/index.html">data collection</a></div>
-  <div><a href = "loading_data/index.html">loading data</a></div>
-  <div><a href = "deploying/index.html">deploying</a></div>
+  <div id="canvas"></div>
+  <div id="msglabel"></div>
+  <div class="contents">
+    <div class="contents-text">
+      <h1>⚜️手旗読取りWeb - 機械学習ver.⚜️</h1>
+      <h2>使い方</h2>
+      <ul>
+          <li>カメラの前でなるべく全身が映るように立ってください</li>
+          <li>原画を正しく打つと画面にその数字が表示されます</li>
+          <li>原画「0」は対応していません。便宜上「原姿」を「0」としています</li>
+          <li>11は左上（-11と表示）に続いて右下（11と表示）を認識すると「11」と判定します</li>
+          <li>原姿（0）→1→10→1→原姿（0）と打つと表示されているカナがリセットされます</li>
+      </ul>
+      <h2>注意点</h2>
+      <ul>
+          <li>機械学習ver.ではiPhone(iOS + Safari)での動作確認できていません</li>
+          <li>背景はなるべくゴチャゴチャしていない方が良いです</li>
+          <li>体（服装）は背景と区別できる色の方が良いです（コントラストがある方が良い）</li>
+          <li>手旗は持たないでください💦</li>
+      </ul>
+      <h3>動作確認済み環境</h3>
+      Windows10 + Microsoft Edge<br>
+      Windows10 + Google Chrome<br>
+      <h3>ソースコード</h3>
+      <a href="https://github.com/Hiroshi32Yoshida/flag_semaphore_reading">Github</a>
+      <h3>Debug</h3>
+      <a href = "data_collection/index.html">data collection</a><br>
+      <a href = "loading_data/index.html">loading data - train</a>
+    </div>
+  </div>
+
+  <script src="flag_semaphore_reading.js"></script>
+
 </body></html>

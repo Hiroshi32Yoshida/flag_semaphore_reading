@@ -5,3 +5,25 @@ html, body {
 canvas {
   display: block;
 }
+.contents {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: black;
+}
+.contents-text {
+  max-width: 600px;
+  text-align: left;
+  margin: auto;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+ul, ol {
+  background: #dadada;/*灰色に*/
+  border-radius :8px;
+  box-shadow :0px 0px 5px silver;
+  padding: 0.5em 0.5em 0.5em 2em;
+}
+ul li, ol li {
+  line-height: 1.5;
+  padding: 0.5em 0;
+}
