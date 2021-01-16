@@ -19,29 +19,6 @@ const RIGHTKNEE = 14;
 const LEFTANKLE = 15;
 const RIGHTANKLE = 16;
 
-const UP = 1;
-const DOWN = 2;
-const LEFT = 3;
-const RIGHT = 4;
-
-const EXTENDED = 0;
-const FOLDED = 1;
-const UNKNOWN = -1;
-
-const ANG_LELBOW = 0;
-const ANG_RELBOW = 1;
-const ANG_LSHOULDER = 2;
-const ANG_RSHOULDER = 3
-const ANG_LSHOULDERW = 4;
-const ANG_RSHOULDERW = 5;
-const ANG_LSHOULDERWN = 6;
-const ANG_RSHOULDERWN = 7;
-
-const LEFTHAND_UPDOWN = 0;
-const RIGHTHAND_UPDOWN = 1;
-const LEFTHAND_LR = 2;
-const RIGHTHAND_LR = 3;
-
 const distance = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
 //const distance = (x0, y0, x1, y1) => Math.sqrt(Math.pow(x1-x0, 2) + Math.pow(y1-y0, 2));
 
@@ -118,4 +95,148 @@ function getGenkaku(text){
     case 'Q': return 14;
     default: return -1;
   }
+}
+
+function judge_kana(text, genkakus) {
+  strGen = genkakus.toString();
+  if (strGen == [1, 10, 1])
+      return '';
+
+  if (strGen == [13]){
+      if (text.length == 0){
+          return text;
+      }
+
+      switch (text.slice(-1)){
+          case 'か': return text.slice(0, -1) + 'が';
+          case 'き': return text.slice(0, -1) + 'ぎ';
+          case 'く': return text.slice(0, -1) + 'ぐ';
+          case 'け': return text.slice(0, -1) + 'げ';
+          case 'こ': return text.slice(0, -1) + 'ご';
+          case 'さ': return text.slice(0, -1) + 'ざ';
+          case 'し': return text.slice(0, -1) + 'じ';
+          case 'す': return text.slice(0, -1) + 'ず';
+          case 'た': return text.slice(0, -1) + 'だ';
+          case 'ち': return text.slice(0, -1) + 'ぢ';
+          case 'つ': return text.slice(0, -1) + 'づ';
+          case 'て': return text.slice(0, -1) + 'で';
+          case 'と': return text.slice(0, -1) + 'ど';
+          case 'は': return text.slice(0, -1) + 'ば';
+          case 'ひ': return text.slice(0, -1) + 'び';
+          case 'ふ': return text.slice(0, -1) + 'ぶ';
+          case 'へ': return text.slice(0, -1) + 'べ';
+          case 'ほ': return text.slice(0, -1) + 'ぼ';
+          default: return text;
+      }
+  }
+
+  if (strGen == [14]){
+      if (text.length == 0){
+          return text;
+      }
+
+      switch(text.slice(-1)){
+          case 'は': return text.slice(0, -1) + 'ぱ';
+          case 'ひ': return text.slice(0, -1) + 'ぴ';
+          case 'ふ': return text.slice(0, -1) + 'ぷ';
+          case 'へ': return text.slice(0, -1) + 'ぺ';
+          case 'ほ': return text.slice(0, -1) + 'ぽ';
+          default: return text;
+      }
+  }
+
+  if (strGen == [9, 3])
+      return text + 'あ';
+  else if (strGen == [3, 2])
+      return text + 'い';
+  else if (strGen == [6, 9])
+      return text + 'う';
+  else if (strGen == [1, -2, 1])
+      return text + 'え';
+  else if (strGen == [1, 2, 3])
+      return text + 'お';
+  else if (strGen == [8, 3])
+      return text + 'か';
+  else if (strGen == [6, 2])
+      return text + 'き';
+  else if (strGen == [-11, 11])
+      return text + 'く';
+  else if (strGen == [7, 3])
+      return text + 'け';
+  else if (strGen == [8, 1])
+      return text + 'こ';
+  else if (strGen == [1, 12])
+      return text + 'さ';
+  else if (strGen == [5, 7])
+      return text + 'し';
+  else if (strGen == [1, 2, 5])
+      return text + 'す';
+  else if (strGen == [9, 7])
+      return text + 'せ';
+  else if (strGen == [5, 3])
+      return text + 'そ';
+  else if (strGen == [-11, 11, 5])
+      return text + 'た';
+  else if (strGen == [7, -2])
+      return text + 'ち';
+  else if (strGen == [12, 3])
+      return text + 'つ';
+  else if (strGen == [6, 3])
+      return text + 'て';
+  else if (strGen == [2, 5])
+      return text + 'と';
+  else if (strGen == [1, 3])
+      return text + 'な';
+  else if (strGen == [6])
+      return text + 'に';
+  else if (strGen == [9, 4])
+      return text + 'ぬ';
+  else if (strGen == [9, 2, 1])
+      return text + 'ね';
+  else if (strGen == [3])
+      return text + 'の';
+  else if (strGen == [10])
+      return text + 'は';
+  else if (strGen == [1, 7])
+      return text + 'ひ';
+  else if (strGen == [9])
+      return text + 'ふ';
+  else if (strGen == [4])
+      return text + 'へ';
+  else if (strGen == [1, 2, 10])
+      return text + 'ほ';
+  else if (strGen == [9, 5])
+      return text + 'ま';
+  else if (strGen == [6, 1])
+      return text + 'み';
+  else if (strGen == [7, 5])
+      return text + 'む';
+  else if (strGen == [3, 5])
+      return text + 'め';
+  else if (strGen == [6, 7])
+      return text + 'も';
+  else if (strGen == [8, 4])
+      return text + 'や';
+  else if (strGen == [9, 1])
+      return text + 'ゆ';
+  else if (strGen == [8, 6])
+      return text + 'よ';
+  else if (strGen == [5, 9])
+      return text + 'ら';
+  else if (strGen == [12])
+      return text + 'り';
+  else if (strGen == [3, 7])
+      return text + 'る';
+  else if (strGen == [7])
+      return text + 'れ';
+  else if (strGen == [7, 8])
+      return text + 'ろ';
+  else if (strGen == [1, 9])
+      return text + 'を';
+  else if (strGen == [2, 9])
+      return text + 'わ';
+  else if (strGen == [5, 1])
+      return text + 'ん';
+  else
+      return text;
 }

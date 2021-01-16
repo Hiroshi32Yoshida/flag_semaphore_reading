@@ -4,7 +4,11 @@ let pose;
 let skeleton;
 
 let brain;
-let poseLabel = "";
+
+let genkaku = -1;
+let count = 0;
+let seq_genkaku = [];
+let curText = '';
 
 function setup() {
   let canvas = createCanvas(videoWidth, videoHeight);
@@ -60,10 +64,31 @@ function classifyPose() {
 }
 
 function gotResult(error, results) {
-  if (results[0].confidence > 0.75) {
-    poseLabel = getGenkaku(results[0].label.toUpperCase());
+  if(error){
+    console.error(error);
+    genkaku = '';
   }else{
-    poseLabel = '';
+    if (results[0].confidence > 0.5) {
+      let result = getGenkaku(results[0].label.toUpperCase());
+      if(result != -1){
+        if(genkaku == result){
+          count++;
+          if(count == 2){
+              seq_genkaku.push(genkaku);
+          }
+        }else{
+            genkaku = result;
+            count = 0;
+        }
+
+        if(result == 0){
+            curText = judge_kana(curText, seq_genkaku);
+            seq_genkaku.splice(0);
+        }
+      }
+    }else{
+      genkaku = '';
+    }
   }
   //console.log(results[0].confidence);
   classifyPose();
@@ -107,10 +132,19 @@ function draw() {
   }
   pop();
 
-  fill(255, 255, 255);
+  fill(255, 0, 0);
   noStroke();
-  textSize(videoWidth/3);
+  textSize(videoWidth/20);
   textFont('sans-serif');
-  textAlign(CENTER, CENTER);
-  text(poseLabel, videoWidth / 2, videoHeight / 2);
+  textAlign(LEFT);
+  text(curText, 10, videoWidth/20+2);
+
+  if(1 < count){
+    fill(255, 255, 255);
+    noStroke();
+    textSize(videoWidth/3);
+    textFont('sans-serif');
+    textAlign(CENTER, CENTER);
+    text(genkaku, videoWidth/2, videoHeight/2);
+  }
 }
