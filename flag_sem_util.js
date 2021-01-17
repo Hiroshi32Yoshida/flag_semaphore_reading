@@ -76,23 +76,23 @@ function logMsg(text){
 
 function getGenkaku(text){
   switch(text){
-    case 'A': return 0;
-    case 'B': return 1;
-    case 'C': return 2;
-    case 'D': return -2;
-    case 'E': return 3;
-    case 'F': return 4;
-    case 'G': return 5;
-    case 'H': return 6;
-    case 'I': return 7;
-    case 'J': return 8;
-    case 'K': return 9;
-    case 'L': return 10;
-    case 'M': return -11;
-    case 'N': return 11;
-    case 'O': return 12;
-    case 'P': return 13;
-    case 'Q': return 14;
+    case 'a': return 0;
+    case 'b': return 1;
+    case 'c': return 2;
+    case 'd': return -2;
+    case 'e': return 3;
+    case 'f': return 4;
+    case 'g': return 5;
+    case 'h': return 6;
+    case 'i': return 7;
+    case 'j': return 8;
+    case 'k': return 9;
+    case 'l': return 10;
+    case 'm': return -11;
+    case 'n': return 11;
+    case 'o': return 12;
+    case 'p': return 13;
+    case 'q': return 14;
     default: return -1;
   }
 }
