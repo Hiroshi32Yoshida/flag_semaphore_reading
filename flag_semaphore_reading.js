@@ -10,6 +10,7 @@ let temp_genkaku = -1;
 let count = 0;
 let seq_genkaku = [];
 let curText = '';
+let bpface;
 
 // debug
 let strconfidence = '0.000';
@@ -33,6 +34,8 @@ function setup() {
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on('pose', gotPoses);
 
+  bpface = loadImage("bp_face.png");
+
   let options = {
     inputs: 22,
     outputs: 17,
@@ -41,9 +44,9 @@ function setup() {
   }
   brain = ml5.neuralNetwork(options);
   const modelInfo = {
-    model: 'model2/model.json',
-    metadata: 'model2/model_meta.json',
-    weights: 'model2/model.weights.bin',
+    model: 'model/model.json',
+    metadata: 'model/model_meta.json',
+    weights: 'model/model.weights.bin',
   };
   brain.load(modelInfo, brainLoaded);
 }
@@ -131,6 +134,7 @@ function draw() {
   if (pose) {
     // debug ***
     strscore = pose.score.toFixed(3);
+    //drawBP(pose.keypoints[RIGHTEAR].position, pose.keypoints[LEFTEAR].position);
     // *********
 
     for (let i = 0; i < skeleton.length; i++) {
@@ -170,4 +174,9 @@ function draw() {
   textFont('sans-serif');
   textAlign(LEFT, BOTTOM);
   text('conf: ' + strconfidence + ', score: ' + strscore + ', jg: ' + genkaku, 10, videoHeight - 2);
+}
+
+function drawBP(rear, lear){
+  let size = (lear.x - rear.x)*2;
+  image(bpface, (lear.x + rear.x - size)/2, (lear.y + rear.y - size)/2, size, size);
 }

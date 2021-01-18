@@ -20,7 +20,6 @@ const LEFTANKLE = 15;
 const RIGHTANKLE = 16;
 
 const distance = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
-//const distance = (x0, y0, x1, y1) => Math.sqrt(Math.pow(x1-x0, 2) + Math.pow(y1-y0, 2));
 
 function pose_normalize(keypoints){
   inputs = [];
@@ -49,7 +48,6 @@ function pose_normalize(keypoints){
 function getCenterCoord(keypoints){
   let center_x, center_y;
   if(keypoints.length > RIGHTHIP){
-    // *正規化準備 -> 上半身の中央点を算出
     let x0 = keypoints[RIGHTSHOULDER].position.x, y0 = keypoints[RIGHTSHOULDER].position.y;
     let x1 = keypoints[LEFTHIP].position.x, y1 = keypoints[LEFTHIP].position.y;
     let x2 = keypoints[RIGHTHIP].position.x, y2 = keypoints[RIGHTHIP].position.y;
