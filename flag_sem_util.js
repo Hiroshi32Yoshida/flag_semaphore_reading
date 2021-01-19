@@ -24,48 +24,68 @@ const distance = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
 function pose_normalize(keypoints){
   inputs = [];
 
-  let x0 = keypoints[NOSE].position.x, y0 = keypoints[NOSE].position.y;
-  let x1 = getCenterCoord(keypoints).x, y1 = getCenterCoord(keypoints).y;
-  if(x1 == undefined || y1 == undefined){
-    //logMsg('****************************************************');
+  // 肩幅を単位距離とする
+  let x0 = keypoints[LEFTSHOULDER].position.x, y0 = keypoints[LEFTSHOULDER].position.y;
+  let x1 = keypoints[RIGHTSHOULDER].position.x, y1 = keypoints[RIGHTSHOULDER].position.y;
+  if(x0 == undefined || y0 == undefined || x1 == undefined || y1 == undefined){
+    logMsg('****************************************************');
     return null;
   }
   let basedist = distance(x0, y0, x1, y1);
   if(basedist == float.NaN || basedist == 0){
-    //logMsg('****************************************************');
+    logMsg('****************************************************');
     return null;
   }
 
-  for (let i = RIGHTEYE; i <= RIGHTHIP; i++) {
-    let l0 = distance(x0, y0, keypoints[i].position.x, keypoints[i].position.y) / basedist;
-    let l1 = distance(x1, y1, keypoints[i].position.x, keypoints[i].position.y) / basedist;
-    inputs.push(l0*100);
-    inputs.push(l1*100);
+  // 両肩を除く9ポイントの正規化距離を登録
+  for (let i = 0; i < LEFTHIP; i++) {
+    if(i != LEFTSHOULDER && i != RIGHTSHOULDER){
+        let l0 = distance(x0, y0, keypoints[i].position.x, keypoints[i].position.y) / basedist;
+        let l1 = distance(x1, y1, keypoints[i].position.x, keypoints[i].position.y) / basedist;
+        inputs.push(l0);
+        inputs.push(l1);
+    }
   }
+
+  // 肩と肘の内角を登録
+    // left elbow
+    deg = calculateInternalAngle(keypoints, LEFTELBOW, LEFTWRIST, LEFTSHOULDER);
+    inputs.push(deg);
+
+    // right elbow
+    deg = calculateInternalAngle(keypoints, RIGHTELBOW, RIGHTWRIST, RIGHTSHOULDER);
+    inputs.push(deg);
+    
+    // left shoulder - elbow
+    deg = calculateInternalAngle(keypoints, LEFTSHOULDER, LEFTELBOW, RIGHTSHOULDER);
+    inputs.push(deg);
+    
+    // right shoulder - elbow
+    deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, RIGHTELBOW, LEFTSHOULDER);
+    inputs.push(deg);
+  
   return inputs;
 }
 
-function getCenterCoord(keypoints){
-  let center_x, center_y;
-  if(keypoints.length > RIGHTHIP){
-    let x0 = keypoints[RIGHTSHOULDER].position.x, y0 = keypoints[RIGHTSHOULDER].position.y;
-    let x1 = keypoints[LEFTHIP].position.x, y1 = keypoints[LEFTHIP].position.y;
-    let x2 = keypoints[RIGHTHIP].position.x, y2 = keypoints[RIGHTHIP].position.y;
-    let x3 = keypoints[LEFTSHOULDER].position.x, y3 = keypoints[LEFTSHOULDER].position.y;
+/*
+ * calculate internal angle
+ */
+function calculateInternalAngle(keypoints, point0, point1, point2) {
+    var a = {x:keypoints[point1].position.x-keypoints[point0].position.x, y:keypoints[point1].position.y-keypoints[point0].position.y};
+    var b = {x:keypoints[point2].position.x-keypoints[point0].position.x, y:keypoints[point2].position.y-keypoints[point0].position.y};
+     
+    var dot = a.x * b.x + a.y * b.y;
+     
+    var absA = Math.sqrt(a.x*a.x + a.y*a.y);
+    var absB = Math.sqrt(b.x*b.x + b.y*b.y);
 
-    let a0 = (y1 - y0) / (x1 - x0), a1 = (y3 - y2) / (x3 -x2);
+    //dot = |a||b|cosθ
+    var cosTheta = dot/(absA*absB);
+     
+    //acosθ
+    var theta = Math.acos(cosTheta) * 180 / Math.PI;
 
-    center_x = (a0 * x0 - y0 - a1 * x2 + y2) / (a0 - a1);
-    center_y = (y1 - y0) / (x1 - x0) * (center_x - x0) + y0;
-    
-    if(Math.abs(a0) === Math.abs(a1)) return false;
-
-    if(center_x > Math.max(x0, x1) || center_x > Math.max(x2, x3) ||
-    center_y > Math.max(y0, y1) || center_x > Math.max(y2, y3) ||
-    center_x < Math.min(x0, x1) || center_x < Math.min(x2, x3) ||
-    center_y < Math.min(y0, y1) || center_y < Math.min(y2, y3)) return false;
-  }
-  return {x : center_x, y : center_y};
+    return theta;
 }
 
 function logMsg(text){

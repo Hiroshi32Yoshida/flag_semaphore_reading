@@ -11,6 +11,7 @@ let count = 0;
 let seq_genkaku = [];
 let curText = '';
 let bpface;
+let result;
 
 // debug
 let strconfidence = '0.000';
@@ -38,7 +39,7 @@ function setup() {
 
   let options = {
     inputs: 22,
-    outputs: 17,
+    outputs: 18,
     task: 'classification',
     debug: true
   }
@@ -66,7 +67,7 @@ function classifyPose() {
      brain.classify(inputs, gotResult);
    }
   } else {
-    genkaku = '';
+    //genkaku = '';
     setTimeout(classifyPose, 100);
   }
 }
@@ -76,7 +77,7 @@ function gotResult(error, results) {
     console.error(error);
     genkaku = '';
   }else{
-    let result = getGenkaku(results[0].label);
+    result = getGenkaku(results[0].label);
     strconfidence = results[0].confidence.toFixed(3);
     if ((result != 0 && results[0].confidence > 0.5) ||
       (result == 0 && results[0].confidence > 0.3)) {
@@ -130,11 +131,15 @@ function draw() {
   //translate(video.width, 0);
   //scale(-1, 1);
   image(video, 0, 0, videoWidth, videoHeight);
+  showbp = document.getElementsByName("bpface");
+  showdebug = document.getElementsByName("debug");
 
   if (pose) {
     // debug ***
     strscore = pose.score.toFixed(3);
-    //drawBP(pose.keypoints[RIGHTEAR].position, pose.keypoints[LEFTEAR].position);
+    if(showbp[0].checked){
+      drawBP(pose.keypoints[RIGHTEAR].position, pose.keypoints[LEFTEAR].position);
+    }
     // *********
 
     for (let i = 0; i < skeleton.length; i++) {
@@ -170,13 +175,15 @@ function draw() {
     textAlign(CENTER, CENTER);
     text(genkaku, videoWidth/2, videoHeight/2);
   }
-  textSize(videoWidth/24);
-  textFont('sans-serif');
-  textAlign(LEFT, BOTTOM);
-  text('conf: ' + strconfidence + ', score: ' + strscore + ', jg: ' + genkaku, 10, videoHeight - 2);
+  if(showdebug[0].checked){
+    textSize(videoWidth/24);
+    textFont('sans-serif');
+    textAlign(LEFT, BOTTOM);
+    text('conf: ' + strconfidence + ', score: ' + strscore + ', jg: ' + result, 10, videoHeight - 2);
+  }
 }
 
 function drawBP(rear, lear){
   let size = (lear.x - rear.x)*2;
-  image(bpface, (lear.x + rear.x - size)/2, (lear.y + rear.y - size)/2, size, size);
+  image(bpface, (lear.x + rear.x - size)/2, (lear.y + rear.y - size)/2, size*1.3, size*1.1);
 }

@@ -14,9 +14,15 @@
 <body>
   <div id="canvas"></div>
   <div id="msglabel"></div>
+  <div id="option_bp">
+    <input type="checkbox" name="bpface" value="showBP">showBP
+  </div>
+  <div id="option_debug">
+    <input type="checkbox" name="debug" value="showDebug">showDebug
+  </div>
   <div class="contents">
     <div class="contents-text">
-      <h1>⚜️手旗読取りWeb - 機械学習ver.⚜️</h1>
+      <h1>⚜️手旗信号読取りWeb - 機械学習ver.⚜️</h1>
       <h2>使い方</h2>
       <ul>
           <li>カメラの前でなるべく全身が映るように立ってください</li>
@@ -40,7 +46,11 @@
       <h3>Debug</h3>
       <a href = "data_collection/index.html">data collection</a><br>
       <a href = "loading_data/index.html">loading data - train</a>
-    </div>
+      <h3>参考</h3>
+      実装方法の詳しい解説をQiitaに書いてみました。<br>
+      <a href="https://qiita.com/hiro32/items/c429aed69847972f6ac2">Qiita: ml5.jsでPoseNetで手旗信号読取りWebを作る</a><br>
+      参考にしてください。
+</div>
   </div>
 
   <script src="flag_semaphore_reading.js"></script>

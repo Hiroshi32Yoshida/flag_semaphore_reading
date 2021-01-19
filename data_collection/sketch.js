@@ -26,7 +26,7 @@ function keyPressed() {
         console.log('not collecting');
         logMsg('not collecting');
         state = 'waiting';
-      }, 10000);
+      }, 15000);
     }, 5000);
   }
 }
@@ -77,14 +77,6 @@ function brainLoaded() {
 
 function classifyPose() {
   if (pose) {
-    //let inputs = [];
-    //for (let i = 0; i < pose.keypoints.length; i++) {
-    //  let x = pose.keypoints[i].position.x;
-    //  let y = pose.keypoints[i].position.y;
-    //  inputs.push(x);
-    //  inputs.push(y);
-    //}
-    //brain.classify(inputs, gotResult);
     let inputs = pose_normalize(pose.keypoints);
     if(inputs == null){
       poseLabel = '';
@@ -142,7 +134,7 @@ function modelLoaded() {
 function draw() {
   push();
   //translate(video.width, 0);
-  scale(1, 1);
+  //scale(1, 1);
   image(video, 0, 0, video.width, video.height);
 
   if (pose) {
