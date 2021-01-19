@@ -73,41 +73,41 @@ function classifyPose() {
 }
 
 function gotResult(error, results) {
-  // if(error){
-  //   console.error(error);
-  //   genkaku = '';
-  // }else{
-  //   result = getGenkaku(results[0].label);
-  //   strconfidence = results[0].confidence.toFixed(3);
-  //   if ((result != 0 && results[0].confidence > 0.5) ||
-  //     (result == 0 && results[0].confidence > 0.3)) {
-  //     if(result != -1){
-  //       if(genkaku == result){
-  //         count++;
-  //         if(count == 3){
-  //           temp_genkaku = genkaku;
-  //           seq_genkaku.push(genkaku);
-  //         }
-  //       }else{
-  //         if(result == 11){
-  //           if(temp_genkaku == -11){
-  //             genkaku = result;
-  //           }
-  //         }else{
-  //           genkaku = result;
-  //         }
-  //         count = 0;
-  //       }
+  if(error){
+    console.error(error);
+    genkaku = '';
+  }else{
+    result = getGenkaku(results[0].label);
+    strconfidence = results[0].confidence.toFixed(3);
+    if ((result != 0 && results[0].confidence > 0.5) ||
+      (result == 0 && results[0].confidence > 0.3)) {
+      if(result != -1){
+        if(genkaku == result){
+          count++;
+          if(count == 3){
+            temp_genkaku = genkaku;
+            seq_genkaku.push(genkaku);
+          }
+        }else{
+          if(result == 11){
+            if(temp_genkaku == -11){
+              genkaku = result;
+            }
+          }else{
+            genkaku = result;
+          }
+          count = 0;
+        }
 
-  //       if(result == 0){
-  //           curText = judge_kana(curText, seq_genkaku);
-  //           seq_genkaku.splice(0);
-  //       }
-  //     }
-  //   }else{
-  //     genkaku = '';
-  //   }
-  // }
+        if(result == 0){
+            curText = judge_kana(curText, seq_genkaku);
+            seq_genkaku.splice(0);
+        }
+      }
+    }else{
+      genkaku = '';
+    }
+  }
   classifyPose();
 }
 
