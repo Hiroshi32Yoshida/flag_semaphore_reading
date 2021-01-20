@@ -38,7 +38,7 @@ function setup() {
   bpface = loadImage("bp_face.png");
 
   let options = {
-    inputs: 22,
+    inputs: 28,
     outputs: 18,
     task: 'classification',
     debug: true

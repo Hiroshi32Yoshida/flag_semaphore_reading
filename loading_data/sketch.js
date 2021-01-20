@@ -3,7 +3,7 @@ let brain;
 function setup() {
   createCanvas(640, 480);
   let options = {
-    inputs: 22,
+    inputs: 28,
     outputs: 18,
     task: 'classification',
     debug: true

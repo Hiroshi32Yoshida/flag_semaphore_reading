@@ -37,13 +37,18 @@ function pose_normalize(keypoints){
     return null;
   }
 
-  // 両肩を除く9ポイントの正規化距離を登録
-  for (let i = 0; i < LEFTHIP; i++) {
+  // 上下判定で渋いことがあるので鼻からの距離も
+  let x2 = keypoints[NOSE].position.x, y2 = keypoints[NOSE].position.y;
+  
+  // 両肩と鼻を除く8ポイントの正規化距離を登録
+  for (let i = 1; i < LEFTHIP; i++) {
     if(i != LEFTSHOULDER && i != RIGHTSHOULDER){
         let l0 = distance(x0, y0, keypoints[i].position.x, keypoints[i].position.y) / basedist;
         let l1 = distance(x1, y1, keypoints[i].position.x, keypoints[i].position.y) / basedist;
+        let l2 = distance(x2, y2, keypoints[i].position.x, keypoints[i].position.y) / basedist;
         inputs.push(l0);
         inputs.push(l1);
+        inputs.push(l2);
     }
   }
 
@@ -57,11 +62,11 @@ function pose_normalize(keypoints){
     inputs.push(deg);
     
     // left shoulder - elbow
-    deg = calculateInternalAngle(keypoints, LEFTSHOULDER, LEFTELBOW, RIGHTSHOULDER);
+    deg = calculateInternalAngle(keypoints, LEFTSHOULDER, LEFTELBOW, LEFTHIP);
     inputs.push(deg);
     
     // right shoulder - elbow
-    deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, RIGHTELBOW, LEFTSHOULDER);
+    deg = calculateInternalAngle(keypoints, RIGHTSHOULDER, RIGHTELBOW, RIGHTHIP);
     inputs.push(deg);
   
   return inputs;
